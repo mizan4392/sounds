@@ -1,22 +1,21 @@
 import React from 'react';
 import axios from 'axios'
+import { Switch, Route } from 'react-router-dom'
+import Home from './Components/Home/Home';
+import Layout from './hoc/Layout';
 
 
+class App extends React.Component {
 
-class App extends React.Component{
 
-
-  componentDidMount(){
-    axios.get('/api/product/woods').then(res=>{
-      console.log(res)
-    })
-  }
-
-  render(){
+  render() {
     return (
-      <div className="App">
-        My App
-      </div>
+      <Layout> 
+        <Switch>
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </Layout>
+
     );
   }
 }
