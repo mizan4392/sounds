@@ -19,6 +19,7 @@ app.use(cookiParser())
 const {User} = require('./models/user')
 const {Brand} = require('./models/brand')
 const {Wood} = require('./models/woods')
+const {Product} = require('./models/product')
 //middlewares
 const {auth} = require('./middleware/auth')
 const {admin} = require('./middleware/admin')
@@ -97,7 +98,7 @@ app.post('/api/product/brand',auth,admin,(req,res)=>{
     const brand = new Brand(req.body)
 
     brand.save((err,doc)=>{
-        if(err) req.json({success:false,err});
+        if(err) res.json({success:false,err});
 
         res.status(200).json({
             success:true,
@@ -121,8 +122,9 @@ app.get('/api/product/brands',(req,res)=>{
 app.post('/api/product/wood',auth,admin,(req,res)=>{
     const wood = new Wood(req.body);
 
+
     wood.save((err,doc)=>{
-        if(err) req.json({success:false,err});
+        if(err) res.json({success:false,err});
 
         res.status(200).json({
             success:true,
@@ -137,6 +139,55 @@ app.get('/api/product/woods',(req,res)=>{
         res.status(200).send(woods)
     })
 })
+
+
+//======================
+//          PRODUCTS
+//======================
+
+app.post('/api/product/article',auth,admin,(req,res)=>{
+   const product = new Product(req.body);
+
+   product.save((err,doc)=>{
+        if(err) return res.json({success:false,err})
+
+        res.status(200).json({
+            success:true,
+            article:doc
+        })
+   })
+})
+
+app.get('/api/product/articles_by_id',(req,res)=>{
+
+    let type = req.query.type
+    let items = req.query.id;
+
+
+
+    if(type === "array"){
+        let ids = req.query.id.split(',');
+
+        items = ids.map(item=>{
+            return mongoose.Types.ObjectId(item)
+        })
+    
+    }
+
+    Product.
+        find({'_id':{$in:items}})
+        .populate('brand')
+        .populate('wood')
+        .exec((err,docs)=>{
+
+        console.log("line 180",docs)
+       
+       return res.status(200).send(docs)
+
+    })
+})
+
+
 
 const port = process.env.PORT || 3002
 
