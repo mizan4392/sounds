@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import {TextField, Button} from '@material-ui/core'
+import {loginUser} from '../../Redux/actions/user_action'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {withRouter} from 'react-router-dom'
+
 
 class Login extends Component {
 
@@ -13,6 +18,13 @@ class Login extends Component {
     }
     handleLogin =e=>{
 
+        this.props.loginUser(this.state).then(res=>{
+            if(res.payload.loginSucess){
+                this.props.history.push('/user/deshbord')
+            }
+            // console.log(res.payload)
+        })
+
     }
     render() {
         return (
@@ -25,5 +37,13 @@ class Login extends Component {
         )
     }
 }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ loginUser }, dispatch);
+  }
+  
 
-export default Login
+  
+  function mapStateToProps({  }) {
+    return {  };
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
