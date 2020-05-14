@@ -19,17 +19,16 @@ class Login extends Component {
     handleLogin =e=>{
 
         this.props.loginUser(this.state).then(res=>{
-            if(res.payload.loginSucess){
+            if(res.payload.loginSuccess){
                 this.props.history.push('/user/deshbord')
             }
-            // console.log(res.payload)
+
         })
 
     }
     render() {
         return (
             <div style={{display:'flex',flexDirection:"column"}}>
-
                 <TextField type="email" name="email" value={this.state.email} placeholder="Enter Your Email"  id="outlined-basic" label="Email" size='medium' onChange={this.handleInputChange} /><br></br>
                 <TextField type="password" name="password" value={this.state.password} placeholder="Enter Your Password"  id="outlined-basic" label="Password" size='medium' onChange={this.handleInputChange} />
                 <Button style={{background:'#d1c9c9',marginTop:"5px"}} onClick={this.handleLogin}> Login </Button>

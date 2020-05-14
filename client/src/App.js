@@ -4,6 +4,8 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
 import Layout from './hoc/Layout';
 import Index from './Components/Authentication/Index';
+import Register from './Components/Authentication/Register';
+import * as ROUTES from './utils/Routs'
 
 
 class App extends React.Component {
@@ -13,8 +15,9 @@ class App extends React.Component {
     return (
       <Layout> 
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Index} />
+          <Route path={ROUTES.ROOT} exact component={ Home} />
+          <Route path={ROUTES.LOGIN} exact component={Index} />
+          <Route path={ROUTES.REGISTER} exact component={Register} />
         </Switch>
       </Layout>
 
