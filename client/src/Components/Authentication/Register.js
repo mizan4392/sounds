@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { registerUser } from '../../Redux/actions/user_action'
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Dialog } from '@material-ui/core';
+import * as ROUTES from '../../utils/Routs'
 
 const styles = theme => ({
     paper: {
@@ -40,11 +39,43 @@ class Register extends Component {
         lastname: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        sucess: false
     }
 
     handleInputChange = e => {
         this.setState({ [e.target.name]: e.target.value })
+    }
+
+    handleRegister = e => {
+        e.preventDefault()
+        if (this.state.password !== this.state.confirmPassword) {
+            alert('password and Confirm Password Not Match')
+        } else {
+            if (this.state.name.length === 0 || this.state.lastname.length === 0) {
+                alert('Must Enter Name And LastName')
+            } else {
+
+                let data = {
+                    name: this.state.name,
+                    lastname: this.state.lastname,
+                    email: this.state.email,
+                    password: this.state.password,
+                }
+
+                this.props.registerUser(data).then(res => {
+
+                    console.log(res.payload)
+                    if (res.payload.success) {
+                        this.setState({ sucess: true })
+                        setTimeout(() => {
+                            this.props.history.push(ROUTES.LOGIN)
+                        }, 3000)
+
+                    }
+                })
+            }
+        }
     }
     render() {
 
@@ -132,11 +163,11 @@ class Register extends Component {
                                             placeholder="Confirm Password"
                                             value={this.state.confirmPassword}
                                             onChange={this.handleInputChange}
-                                            error={this.state.password === this.state.confirmPassword ? false:true}
+                                            error={this.state.password === this.state.confirmPassword ? false : true}
                                         />
                                     </Grid>
 
-                                   
+
                                 </Grid>
                                 <Button
                                     type="submit"
@@ -144,26 +175,50 @@ class Register extends Component {
                                     variant="contained"
                                     color="primary"
                                     className={classes.submit}
+                                    onClick={this.handleRegister}
                                 >
                                     Sign Up
                                     </Button>
                                 <Grid container justify="flex-end">
                                     <Grid item>
-                                        <Link href="#" variant="body2">
+                                        <p onClick={()=>{
+                                            this.props.history.push(ROUTES.LOGIN)
+                                        }} style={{color:'blue',textDecoration:'underline',cursor:'pointer',width:'100%'}}>
                                             Already have an account? Sign in
-                                            </Link>
+                                           </p>
                                     </Grid>
                                 </Grid>
                             </form>
-
-
                         </Container>
                     </div>
                 </div>
+
+                <Dialog open={this.state.sucess}>
+                    <div className="dialog_alert">
+                        <div>Congratulation !!</div>
+                        <div>
+                            Register Sucessful You Will Be Redirected to Login!
+                        </div>
+
+                    </div>
+
+                </Dialog>
 
             </div>
         )
     }
 }
 
-export default withStyles(styles)(Register)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ registerUser }, dispatch);
+}
+
+
+
+function mapStateToProps({ }) {
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withStyles(styles)(Register)));
+
+
