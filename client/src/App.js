@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Switch, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
 import Layout from './hoc/Layout';
-import Login from './Components/Authentication/Login';
+import Index from './Components/Authentication/Index';
 
 
 class App extends React.Component {
@@ -14,7 +14,7 @@ class App extends React.Component {
       <Layout> 
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
+          <Route path="/login" exact component={Index} />
         </Switch>
       </Layout>
 

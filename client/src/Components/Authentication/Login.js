@@ -1,34 +1,29 @@
-import React from 'react'
-import MyButton from '../../utils/MyButton'
+import React, { Component } from 'react'
+import {TextField, Button} from '@material-ui/core'
 
-function Login() {
-    return (
-        <div className="page_wrapper">
-            <div className="container">
-                <div className="register_login_container">
-                    <div className="left">
-                        <h1>New Customer</h1>
-                        <p>some text</p>
-                        <MyButton
-                            type="default"
-                            title="Create an account"
-                            linkTo="/register"
-                            addStyles={{
-                                margin: '10px 0 0 0'
-                            }}
-                        />
-                    </div>
+class Login extends Component {
 
-                    <div className="right">
-                        <h2>Already Have An Account?</h2>
-                        Login
+    state={
+        email:'',
+        password:''
+    }
 
-                    </div>
+    handleInputChange = e=>{
+        this.setState({[e.target.name]:e.target.value})
+    }
+    handleLogin =e=>{
 
-                </div>
+    }
+    render() {
+        return (
+            <div style={{display:'flex',flexDirection:"column"}}>
+
+                <TextField type="email" name="email" value={this.state.email} placeholder="Enter Your Email"  id="outlined-basic" label="Email" size='medium' onChange={this.handleInputChange} /><br></br>
+                <TextField type="password" name="password" value={this.state.password} placeholder="Enter Your Password"  id="outlined-basic" label="Password" size='medium' onChange={this.handleInputChange} />
+                <Button style={{background:'#d1c9c9',marginTop:"5px"}} onClick={this.handleLogin}> Login </Button>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Login
