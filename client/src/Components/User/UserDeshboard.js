@@ -1,7 +1,8 @@
 import React from 'react'
 import UserLayout from '../../hoc/UserLayout'
 import MyButton from '../../utils/MyButton'
-function UserDeshboard() {
+function UserDeshboard({ user }) {
+
     return (
         <UserLayout>
             <div>
@@ -9,9 +10,9 @@ function UserDeshboard() {
                 <div className="user_nfo_panel">
                     <h1>User information</h1>
                     <div>
-                        <span>name</span>
-                        <span>lastname</span>
-                        <span>email</span>
+                        <span>{user && user.name}</span>
+                        <span>{user && user.lastname}</span>
+                        <span>{user && user.email}</span>
                     </div>
                     <MyButton
                         type="default"
@@ -26,7 +27,7 @@ function UserDeshboard() {
                         history
                     </div>
                 </div>
-                
+
 
             </div>
         </UserLayout>

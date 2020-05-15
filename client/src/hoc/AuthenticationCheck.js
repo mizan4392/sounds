@@ -19,7 +19,7 @@ export default function (ComposeClass, reload, adminRoute = null) {
             this.props.userAuth().then(res => {
 
                 let user = res.payload
-                console.log(user)
+                
 
                 if (!user.isAuth) {
                     if (reload) {
@@ -69,8 +69,8 @@ export default function (ComposeClass, reload, adminRoute = null) {
 
 
 
-    function mapStateToProps({ state }) {
-        return { user: state };
+    function mapStateToProps({ user }) {
+        return {  user:user.userData };
     }
 
 
