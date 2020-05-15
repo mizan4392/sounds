@@ -3,6 +3,16 @@ import {USER_SERVER} from '../../utils/misc'
 import * as TYPES from '../types'
 
 
+export function userAuth(){
+    const request = axios.get(`${USER_SERVER}/auth`)
+        .then(res=> res.data)
+    return{
+        type:TYPES.AUTH_USER,
+        payload:request
+    }
+}
+
+
 export function registerUser(data){
     const request = axios.post(`${USER_SERVER}/register`,data)
         .then(res=> res.data)

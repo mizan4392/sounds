@@ -4,6 +4,7 @@ import {loginUser} from '../../Redux/actions/user_action'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {withRouter} from 'react-router-dom'
+import * as ROUTES from '../../utils/Routs'
 
 
 class Login extends Component {
@@ -20,7 +21,7 @@ class Login extends Component {
 
         this.props.loginUser(this.state).then(res=>{
             if(res.payload.loginSuccess){
-                this.props.history.push('/user/deshbord')
+                this.props.history.push(ROUTES.USER_DESHBOARD)
             }
 
         })
