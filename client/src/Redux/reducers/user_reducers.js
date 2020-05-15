@@ -4,6 +4,9 @@ import * as TYPES from '../types'
 export default function (state = {}, action) {
     switch (action.type) {
 
+        case TYPES.LOGOUT_USER:
+            return {...state}
+
         case TYPES.AUTH_USER:
             return {...state,userData:action.payload}
 
