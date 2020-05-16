@@ -1,5 +1,5 @@
 # sounds
-1.clone the project 
+1.clone the project <br/>
 2.run `npm run dev`
 
 
