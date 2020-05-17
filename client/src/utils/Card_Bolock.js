@@ -5,18 +5,17 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import MyButton from '../utils/MyButton'
 
-
-const styles = theme =>({
+const styles = theme => ({
     root: {
-      maxWidth: 250,
+        maxWidth: 250,
     },
     media: {
-      height: 80,
+        height: 80,
     },
-  });
+});
 
 class Card_Bolock extends Component {
 
@@ -24,7 +23,7 @@ class Card_Bolock extends Component {
     render() {
 
 
-        const {classes} = this.props
+        const { classes } = this.props
 
         const renderCard = this.props.list && this.props.list.map((item, i) => {
             return (
@@ -40,16 +39,45 @@ class Card_Bolock extends Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {item.name}
                                 </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">Brand: {item.brand.name}</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">Wood: {item.wood.name}</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">Price:  {item.price}</Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">Brand: {item.brand.name}</Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">Wood: {item.wood.name}</Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">Price:  {item.price}</Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                               Shope Now
-                            </Button>
-                        </CardActions>
+
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',padding:'10px'}}>
+                            
+                            <div style={{width:'80%'}}>  
+                                <MyButton
+                                    title="View Product"
+                                    type="default"
+                                    altClass="card_link"
+                                    linkTo={`product_detailes/${item._id}`}
+                                    addStyles={{
+                                        margin: '10px 0 0 0'
+                                    }}
+                                >
+
+                                </MyButton>
+
+                            </div>
+                            <div >
+                                <MyButton
+                                    type="bag_link"
+                                    runAction={()=>{
+                                        console.log("somthing")
+                                    }}
+                                    altClass="card_link"
+                                    linkTo={`product_detailes/${item._id}`}
+                                    addStyles={{
+                                        margin: '10px 0 0 0'
+                                    }}
+                                >
+
+                                </MyButton>
+                            </div>
+                        </div>
+
                     </Card>
 
                 </Grid>
@@ -68,7 +96,7 @@ class Card_Bolock extends Component {
                         ) : <></>
                     }
 
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                         {renderCard}
                     </Grid>
 
