@@ -37,6 +37,7 @@ class Login extends Component {
         )
     }
 }
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ loginUser }, dispatch);
   }
