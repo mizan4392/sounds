@@ -151,6 +151,9 @@ app.get('/api/product/woods',(req,res)=>{
 
 //BY ARRIVAL
 
+
+
+
 app.get('/api/product/articles',(req,res)=>{
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id'

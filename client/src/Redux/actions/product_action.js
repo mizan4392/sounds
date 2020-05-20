@@ -4,6 +4,31 @@ import * as TYPES from '../types'
 
 
 
+export function getProductToShop(skip,limit,filter=[],prevState=[]){
+
+    const data = {
+        limit,
+        skip,
+        filter
+    }
+
+
+    const request = axios.get(`${USER_PRODUCT}/shop`,data)
+        .then(res=>{
+            return {
+                size:res.data.size,
+                articles:res.data.articles
+            }
+        })
+
+    return{
+        type:TYPES.GET_PRODUCT_TO_SHOP,
+        payload:request
+    }
+    
+}
+
+
 export function getProductBrands(){
     const request = axios.get(`${USER_PRODUCT}/brands`)
 

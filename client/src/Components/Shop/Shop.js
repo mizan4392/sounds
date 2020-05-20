@@ -3,7 +3,7 @@ import Page_Top from '../../utils/Page_Top'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { getProductBrands, getProductWoods } from '../../Redux/actions/product_action'
+import { getProductBrands, getProductWoods ,getProductToShop} from '../../Redux/actions/product_action'
 import CollapsCheckBox from '../../utils/CollapsCheckBox'
 import CollapsRadio from '../../utils/CollapsRadio'
 import { frets,price } from '../../utils/fixed_cat'
@@ -27,6 +27,11 @@ class Shop extends Component {
 
         this.props.getProductBrands()
         this.props.getProductWoods()
+        this.props.getProductToShop(
+            this.state.skip,
+            this.state.limit,
+            this.state.filters
+        )
 
     }
 
@@ -107,7 +112,7 @@ class Shop extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getProductBrands, getProductWoods }, dispatch);
+    return bindActionCreators({ getProductBrands, getProductWoods,getProductToShop }, dispatch);
 }
 
 

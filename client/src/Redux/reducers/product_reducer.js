@@ -4,6 +4,10 @@ import * as TYPES from '../types'
 export default function (state = {}, action) {
     switch (action.type) {
 
+        case TYPES.GET_PRODUCT_TO_SHOP:
+            return {...state,roShop:payload.articles,toShopSize:payload.size}
+
+
         case TYPES.GET_PRODUCT_WOODS:
             return {...state,woods:action.payload}
 
