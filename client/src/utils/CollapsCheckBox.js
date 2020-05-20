@@ -27,24 +27,51 @@ class CollapsCheckBox extends Component {
             :
             <FontAwesomeIcon icon={faAngleDown} className="icon" />
     }
+    hendleToggle = id => () => {
 
-    renderList = () => {
+        console.log("clicked")
+        const { checked } = this.state
+        const currentIndex = checked.indexOf(id)
+        const newChecked = [...checked];
 
-        console.log('lists-------',this.props.list)
+        if (currentIndex === -1) {
+            newChecked.push(id)
+        } else {
+            newChecked.splice(currentIndex, 1)
+        }
 
-        return this.props.list ?
+        this.setState({checked: newChecked},()=>{
+            this.props.handleFilters(newChecked)
+        })
+    }
+
+    render() {
+
+
+        console.log(this.state)
+
+        const renderList = this.props.list ?
             this.props.list.map((value) => {
                 return (
-                    <div>
-                        hey
-                    </div>
+
+                    <ListItem key={value._id} style={{ padding: '10px 0' }} >
+                        <ListItemText primary={value.name} />
+
+                        <ListItemSecondaryAction>
+                            <Checkbox
+                                color="primary"
+                                onChange={this.hendleToggle(value._id)}
+                                checked={this.state.checked.indexOf(value._id) !== -1}
+                            />
+                        </ListItemSecondaryAction>
+
+                    </ListItem>
                 )
 
             })
-            : <div></div>
+            : null
 
-    }
-    render() {
+
         return (
             <div className="collapse_items_wrapper">
                 <List style={{ borderBottom: '1px solid #dbdbdb' }}>
@@ -57,10 +84,12 @@ class CollapsCheckBox extends Component {
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit >
                         <List component="div" disablePadding>
-                            {this.renderList()}
+                            {renderList}
 
                         </List>
                     </Collapse>
+
+
                 </List>
 
             </div>
