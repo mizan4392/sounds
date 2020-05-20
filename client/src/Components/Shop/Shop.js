@@ -5,20 +5,21 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getProductBrands, getProductWoods } from '../../Redux/actions/product_action'
 import CollapsCheckBox from '../../utils/CollapsCheckBox'
-import {frets} from '../../utils/fixed_cat'
+import CollapsRadio from '../../utils/CollapsRadio'
+import { frets,price } from '../../utils/fixed_cat'
 
 class Shop extends Component {
 
 
-    state={
-        grid:'',
-        limit:6,
-        skip:0,
-        filters:{
-            brand:[],
-            frets:[],
-            wood:[],
-            price:[]
+    state = {
+        grid: '',
+        limit: 6,
+        skip: 0,
+        filters: {
+            brand: [],
+            frets: [],
+            wood: [],
+            price: []
         }
     }
 
@@ -29,11 +30,29 @@ class Shop extends Component {
 
     }
 
+    handlePrice = (value) =>{
+        const data = price
+        let array = []
+
+        for(let key in data){
+            if(data[key]._id === parseInt(value,10)){
+                array = data[key].array
+            }
+        }
+
+        return array
+    }
+
     handleFilters = (filters, category) => {
-        const newFilters = {...this.state.filters}
+        const newFilters = { ...this.state.filters }
         newFilters[category] = filters
 
-        this.setState({filters:newFilters})
+        if(category === "price"){
+            let priceValues = this.handlePrice(filters)
+            newFilters[category] = priceValues
+        }
+
+        this.setState({ filters: newFilters })
     }
 
     render() {
@@ -59,11 +78,17 @@ class Shop extends Component {
                                 handleFilters={(filters) => this.handleFilters(filters, 'brand')}
                             />
 
-                             <CollapsCheckBox
+                            <CollapsCheckBox
                                 initState={false}
                                 title="Wood"
                                 list={this.props.products && this.props.products.woods && this.props.products.woods.data}
                                 handleFilters={(filters) => this.handleFilters(filters, 'wood')}
+                            />
+                            <CollapsRadio
+                                initState={true}
+                                title="Price"
+                                list={price}
+                                handleFilters={(filters) => this.handleFilters(filters, 'price')}
                             />
                         </div>
 
