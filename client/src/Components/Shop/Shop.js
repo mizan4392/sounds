@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {getProductBrands,getProductWoods} from '../../Redux/actions/product_action'
+import CollapsCheckBox from '../../utils/CollapsCheckBox'
 
 
 class Shop extends Component {
@@ -15,7 +16,12 @@ class Shop extends Component {
 
     }
 
+    handleFilters = filters =>{
+
+    }
+
     render() {
+
 
         return (
             <div>
@@ -23,7 +29,12 @@ class Shop extends Component {
                 <div className="container">
                     <div className="shop_wrapper">
                         <div className="left">
-                            left
+                            <CollapsCheckBox
+                                initState={true}
+                                title="Brands"
+                                list={this.props.products && this.props.products.brands && this.props.products.brands.data}
+                                handleFilters = {(filters)=>this.handleFilters(filters,'brand')}
+                                />
                         </div>
 
 
