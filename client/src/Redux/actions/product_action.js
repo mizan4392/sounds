@@ -6,6 +6,9 @@ import * as TYPES from '../types'
 
 export function getProductToShop(skip,limit,filter=[],prevState=[]){
 
+
+    console.log("product action 10")
+
     const data = {
         limit,
         skip,
@@ -13,7 +16,7 @@ export function getProductToShop(skip,limit,filter=[],prevState=[]){
     }
 
 
-    const request = axios.get(`${USER_PRODUCT}/shop`,data)
+    const request = axios.post(`${USER_PRODUCT}/shop`,data)
         .then(res=>{
             return {
                 size:res.data.size,

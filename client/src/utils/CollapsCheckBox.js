@@ -29,7 +29,6 @@ class CollapsCheckBox extends Component {
     }
     hendleToggle = id => () => {
 
-        console.log("clicked")
         const { checked } = this.state
         const currentIndex = checked.indexOf(id)
         const newChecked = [...checked];
@@ -46,9 +45,6 @@ class CollapsCheckBox extends Component {
     }
 
     render() {
-
-
-        console.log(this.state)
 
         const renderList = this.props.list ?
             this.props.list.map((value) => {

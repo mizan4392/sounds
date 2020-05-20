@@ -7,6 +7,7 @@ import { getProductBrands, getProductWoods ,getProductToShop} from '../../Redux/
 import CollapsCheckBox from '../../utils/CollapsCheckBox'
 import CollapsRadio from '../../utils/CollapsRadio'
 import { frets,price } from '../../utils/fixed_cat'
+import LoadMoreCard from './LoadMoreCard'
 
 class Shop extends Component {
 
@@ -48,6 +49,18 @@ class Shop extends Component {
         return array
     }
 
+    showFiltersResult = (filters) =>{
+
+        console.log("checked");
+        this.props.getProductToShop(
+            0,
+            this.state.limit,
+            filters
+        ).then(()=>{
+            this.setState({skip:0})
+        })
+    }
+
     handleFilters = (filters, category) => {
         const newFilters = { ...this.state.filters }
         newFilters[category] = filters
@@ -57,11 +70,17 @@ class Shop extends Component {
             newFilters[category] = priceValues
         }
 
+        this.showFiltersResult(newFilters)
+
         this.setState({ filters: newFilters })
     }
 
+    
+
     render() {
 
+
+        console.log("shop 82====>",this.state)
 
         return (
             <div>
@@ -99,7 +118,8 @@ class Shop extends Component {
 
 
                         <div className="left">
-                            right
+                            
+                            <LoadMoreCard />
                         </div>
 
                     </div>
