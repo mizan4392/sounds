@@ -75,19 +75,24 @@ class Shop extends Component {
         this.setState({ filters: newFilters })
     }
 
+    loadMore = () =>{
+        console.log("load more")
+    }
+
     
 
     render() {
 
 
-        console.log("shop 82====>",this.state)
+        const {products} = this.props
+        const {limit,grid} = this.state
 
         return (
             <div>
                 <Page_Top title="Browse Products" />
                 <div className="container">
                     <div className="shop_wrapper">
-                        <div className="right">
+                        <div className="left">
                             <CollapsCheckBox
                                 initState={true}
                                 title="Brands"
@@ -117,9 +122,23 @@ class Shop extends Component {
                         </div>
 
 
-                        <div className="left">
+                        <div className="right">
+                            <div className="shop_options">
+                                <div className="shop_grids clear">
+                                    Grids
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
                             
-                            <LoadMoreCard />
+                            <LoadMoreCard 
+                                size = {products && products.toShopSize}
+                                limit={limit}
+                                grid={grid}
+                                list={products.toShop}
+                                loadMore={()=>this.loadMore()}
+                                />
                         </div>
 
                     </div>
