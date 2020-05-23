@@ -8,6 +8,8 @@ import CollapsCheckBox from '../../utils/CollapsCheckBox'
 import CollapsRadio from '../../utils/CollapsRadio'
 import { frets,price } from '../../utils/fixed_cat'
 import LoadMoreCard from './LoadMoreCard'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import {faBars,faTh} from '@fortawesome/fontawesome-free-solid'
 
 class Shop extends Component {
 
@@ -88,8 +90,6 @@ class Shop extends Component {
         
     }
 
-    
-
     render() {
 
 
@@ -133,15 +133,7 @@ class Shop extends Component {
 
 
                         <div className="right" >
-                            <div className="shop_options">
-                                <div className="shop_grids clear">
-                                    Grids
-                                </div>
-                            </div>
-                            <div>
-
-                            </div>
-                            
+                        
                             <LoadMoreCard 
                                 size = {products && products.toShopSize}
                                 limit={limit}

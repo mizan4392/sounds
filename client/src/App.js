@@ -9,6 +9,7 @@ import * as ROUTES from './utils/Routs'
 import UserDeshboard from './Components/User/UserDeshboard';
 import auth from './hoc/AuthenticationCheck'
 import Shop from './Components/Shop/Shop';
+import AddProduct from './Components/User/Admin/AddProduct';
 
 
 class App extends React.Component {
@@ -18,8 +19,10 @@ class App extends React.Component {
 
   
     return (
+    
       <Layout>
         <Switch>
+        <Route path={ROUTES.ADD_PRODUCT} exact component={auth(AddProduct,true)} />
         <Route path={ROUTES.SHOP} exact component={auth(Shop,null)} />
           <Route path={ROUTES.USER_DESHBOARD} exact component={auth(UserDeshboard,true)} />
           <Route path={ROUTES.ROOT} exact component={auth(Home,null)} />
