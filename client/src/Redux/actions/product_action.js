@@ -4,10 +4,9 @@ import * as TYPES from '../types'
 
 
 
-export function getProductToShop(skip,limit,filter=[],prevState=[]){
+export async function  getProductToShop (skip,limit,filter=[],prevState=[])  {
 
 
-    console.log("product action 10")
 
     const data = {
         limit,
@@ -16,11 +15,13 @@ export function getProductToShop(skip,limit,filter=[],prevState=[]){
     }
 
 
-    const request = axios.post(`${USER_PRODUCT}/shop`,data)
+    const request = await axios.post(`${USER_PRODUCT}/shop`,data)
         .then(res=>{
+         
             return {
                 size:res.data.size,
-                articles:res.data.articles
+                articles:res.data.articles,
+                prevState:prevState
             }
         })
 

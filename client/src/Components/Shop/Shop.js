@@ -51,7 +51,6 @@ class Shop extends Component {
 
     showFiltersResult = (filters) =>{
 
-        console.log("checked");
         this.props.getProductToShop(
             0,
             this.state.limit,
@@ -76,7 +75,17 @@ class Shop extends Component {
     }
 
     loadMore = () =>{
-        console.log("load more")
+        let skip = this.state.skip + this.state.limit
+
+        this.props.getProductToShop(
+            skip,
+            this.state.limit,
+            this.state.filters,
+            this.props.products.toShop
+        ).then(()=>{
+            this.setState({skip})
+        })
+        
     }
 
     
@@ -85,6 +94,7 @@ class Shop extends Component {
 
 
         const {products} = this.props
+
         const {limit,grid} = this.state
 
         return (
@@ -92,7 +102,7 @@ class Shop extends Component {
                 <Page_Top title="Browse Products" />
                 <div className="container">
                     <div className="shop_wrapper">
-                        <div className="left">
+                        <div className="right" style={{width:'25%'}}>
                             <CollapsCheckBox
                                 initState={true}
                                 title="Brands"
@@ -122,7 +132,7 @@ class Shop extends Component {
                         </div>
 
 
-                        <div className="right">
+                        <div className="right" >
                             <div className="shop_options">
                                 <div className="shop_grids clear">
                                     Grids
@@ -136,7 +146,7 @@ class Shop extends Component {
                                 size = {products && products.toShopSize}
                                 limit={limit}
                                 grid={grid}
-                                list={products.toShop}
+                                list={products && products.toShop}
                                 loadMore={()=>this.loadMore()}
                                 />
                         </div>

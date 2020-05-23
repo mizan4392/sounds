@@ -24,7 +24,10 @@ class Card_Block_Shop extends Component {
 
         const { classes } = this.props
 
-        const renderCard = this.props.list && this.props.list.map((item, i) => {
+        console.log("//////////////////", this.props.list)
+
+        const renderCard = this.props.list === undefined ? null : this.props.list.map((item, i) => {
+
             return (
                 <Grid sm={4} xs={6} key={item._id}>
                     <Card className={classes.root}>

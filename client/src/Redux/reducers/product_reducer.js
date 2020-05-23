@@ -5,7 +5,7 @@ export default function (state = {}, action) {
     switch (action.type) {
 
         case TYPES.GET_PRODUCT_TO_SHOP:
-            return {...state,toShop:action.payload.articles,toShopSize:action.payload.size}
+            return {...state,toShop:action.payload.articles,toShopSize:action.payload.size,prevState:action.payload.prevState}
 
 
         case TYPES.GET_PRODUCT_WOODS:
