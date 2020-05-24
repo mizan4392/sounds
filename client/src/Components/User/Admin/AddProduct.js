@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { TextField, Button ,TextareaAutosize} from '@material-ui/core'
 import UserLayout from '../../../hoc/UserLayout'
+import DropDown_Brand from '../../Dropdowns/DropDown_Brand'
+import DropdownShiping from '../../Dropdowns/DropdownShiping'
+import DropDownStock from '../../Dropdowns/DropDownStock'
+import DropDownWoods from '../../Dropdowns/DropDownWoods'
+import DropdownFrest from '../../Dropdowns/DropdownFrest'
+
 
 class AddProduct extends Component {
 
@@ -23,13 +29,19 @@ class AddProduct extends Component {
                     <TextareaAutosize rows={4} type="text" name="product_des" value={this.state.product_des} placeholder="Product Description" id="outlined-basic" label="description" size='medium' onChange={this.handleInputChange} /><br></br>
                     <TextField type="number" name="price" value={this.state.price} placeholder="Enter Product Price" id="outlined-basic" label="Price" size='medium' onChange={this.handleInputChange} /><br></br>
                     <div>
-                        product Brand
+                        <DropDown_Brand />
                     </div>
                     <div>
-                        Shiping
+                        <DropdownShiping />
                     </div>
                     <div>
-                        Avilabel in Stock
+                        <DropDownStock />
+                    </div>
+                    <div>
+                        <DropDownWoods />
+                    </div>
+                    <div>
+                       <DropdownFrest />
                     </div>
                 </div>
             </UserLayout>
