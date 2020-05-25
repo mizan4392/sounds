@@ -8,6 +8,7 @@ import DropDownWoods from '../../Dropdowns/DropDownWoods'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DropdownFrets from '../../Dropdowns/DropdownFrets'
+import DropdownPublish from '../../Dropdowns/DropdownPublish'
 
 
 class AddProduct extends Component {
@@ -33,6 +34,7 @@ class AddProduct extends Component {
             available:this.props.misc.selectedStock,
             wood:this.props.misc.selectedWoodId,
             frets:this.props.misc.selectedFretsId,
+            publish:this.props.misc.selectedPublish
         }
 
         console.log(data)
@@ -61,6 +63,9 @@ class AddProduct extends Component {
                     </div>
                     <div>
                        <DropdownFrets />
+                    </div>
+                    <div>
+                       <DropdownPublish />
                     </div>
                     <div>
                        <Button onClick={this.handleSubmit}>Add Product</Button>

@@ -17,6 +17,9 @@ export default function (state = {}, action) {
         case TYPES.SET_SELECTED_FRETS_ID:
             return { ...state, selectedFretsId: action.payload }
 
+        case TYPES.SET_SELECTED_PUBLISH:
+            return { ...state, selectedPublish: action.payload }
+
         default:
             return state
     }

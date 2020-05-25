@@ -1,5 +1,14 @@
 import * as TYPES from '../types'
 
+
+export function setSelectedPublish(data){
+    return{
+        type:TYPES.SET_SELECTED_PUBLISH,
+        payload:data
+    }
+    
+}
+
 export function setSelectedBrandId(data){
     return{
         type:TYPES.SET_SELECTED_BRAND_ID,
