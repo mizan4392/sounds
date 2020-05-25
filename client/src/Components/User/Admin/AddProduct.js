@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import DropdownFrets from '../../Dropdowns/DropdownFrets'
 import DropdownPublish from '../../Dropdowns/DropdownPublish'
 import {addProduct} from '../../../Redux/actions/product_action'
+import FileUplode from '../../../utils/FileUplode'
 
 
 class AddProduct extends Component {
@@ -49,6 +50,9 @@ class AddProduct extends Component {
             }
         })
     }
+
+    imageHandler = fileData =>{
+    }
     render() {
 
         console.log(this.props.misc)
@@ -56,6 +60,9 @@ class AddProduct extends Component {
             <UserLayout>
                 <h2>Add new Product</h2>
                 <div style={{ display: 'flex', flexDirection: "column" }}>
+                    <div>
+                        <FileUplode imageHandler={(images)=>this.imageHandler(images)}/>
+                    </div>
                     <TextField type="text" name="name" value={this.state.name} placeholder="Enter Product Name" id="outlined-basic" label="ProductName" size='medium' onChange={this.handleInputChange} /><br></br>
                     <TextareaAutosize rows={4} type="text" name="description" value={this.state.description} placeholder="Product Description" id="outlined-basic" label="description" size='medium' onChange={this.handleInputChange} /><br></br>
                     <TextField type="number" name="price" value={this.state.price} placeholder="Enter Product Price" id="outlined-basic" label="Price" size='medium' onChange={this.handleInputChange} /><br></br>
