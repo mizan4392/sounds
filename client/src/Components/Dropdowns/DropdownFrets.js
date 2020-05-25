@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Select, Card } from 'antd';
 import 'antd/dist/antd.css';
-import {setSelectedWoodId} from '../../Redux/actions/misc_action'
+import {setSelectedFretsId} from '../../Redux/actions/misc_action'
 import {frets} from '../../utils/fixed_cat'
-
 const { Option } = Select;
 
 
-class DropdwnFrest extends Component {
+class DropdownFrets extends Component {
 
-    onChange(value) {
-        this.props.setSelectedWoodId(value)
+
+
+    onChange = (value)=> {
+
+        this.props.setSelectedFretsId(value)
     }
 
 
     renderDropDownOptions() {
         var arr = []
-       
+      
         if (frets) {
             for (var i = 0; i <  frets.length; i++) {
                 var data = frets[i];
@@ -32,7 +34,7 @@ class DropdwnFrest extends Component {
     render() {
 
         return (
-            <Card title="Select  Frets" size="small" >
+            <Card title="Select Frets" size="small" >
                 <Select
                     style={{ width: "100%", minWidth: '200px' }}
                     placeholder={"Select Frets"}
@@ -44,8 +46,6 @@ class DropdwnFrest extends Component {
                 >
                     {this.renderDropDownOptions()}
                 </Select>
-
-
             </Card>
 
         )
@@ -54,10 +54,10 @@ class DropdwnFrest extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setSelectedWoodId}, dispatch);
+    return bindActionCreators({setSelectedFretsId}, dispatch);
 }
 
 
+export default connect(undefined, mapDispatchToProps)(DropdownFrets);
 
-export default connect(undefined, mapDispatchToProps)(DropdwnFrest);
 

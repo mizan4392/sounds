@@ -7,7 +7,6 @@ export default function (state = {}, action) {
         case TYPES.GET_PRODUCT_TO_SHOP:
             return {...state,toShop:action.payload.articles,toShopSize:action.payload.size,prevState:action.payload.prevState}
 
-
         case TYPES.GET_PRODUCT_WOODS:
             return {...state,woods:action.payload}
 
@@ -19,6 +18,9 @@ export default function (state = {}, action) {
 
         case TYPES.GET_PRODUCT_BY_ARRIVAL:
             return {...state,byArrival:action.payload}
+
+        case TYPES.ADD_PRODUCT:
+            return {...state,addProduct:action.payload}
 
         default:
             return state

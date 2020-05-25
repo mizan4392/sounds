@@ -4,17 +4,26 @@ import * as TYPES from '../types'
 
 
 
+export function addProducts(data){
+
+    const request = axios.get(`${USER_PRODUCT}/article`,data)
+
+    return{
+        type:TYPES.ADD_PRODUCT,
+        payload:request
+    }
+    
+}
+
+
+
 export async function  getProductToShop (skip,limit,filter=[],prevState=[])  {
-
-
 
     const data = {
         limit,
         skip,
         filter
     }
-
-
     const request = await axios.post(`${USER_PRODUCT}/shop`,data)
         .then(res=>{
          

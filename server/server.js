@@ -153,9 +153,6 @@ app.get('/api/product/woods', (req, res) => {
 
 app.post('/api/product/shop', (req, res) => {
 
-
-    
-
     const order = req.body.order ? req.body.order : 'desc'
     const sortBy = req.body.sortBy ? req.body.sortBy : '_id'
     let limit = req.body.limit ? parseInt(req.body.limit) : 20;
@@ -177,9 +174,6 @@ app.post('/api/product/shop', (req, res) => {
         }
     }
 
-
-    console.log("server 181=>>>>>>>>>>>",findArgs)
-
     Product
         .find(findArgs)
         .populate('brand')
@@ -191,19 +185,11 @@ app.post('/api/product/shop', (req, res) => {
 
             if(err) return res.status(400).send(err)
 
-            // console.log("server 191" ,articles.length,articles)
-
-
             res.status(200).json({
                 size:articles.length,
                 articles
             })
-
-           
-
         })
-
-
 })
 
 
