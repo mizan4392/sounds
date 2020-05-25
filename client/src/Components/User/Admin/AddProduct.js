@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DropdownFrets from '../../Dropdowns/DropdownFrets'
 import DropdownPublish from '../../Dropdowns/DropdownPublish'
+import {addProduct} from '../../../Redux/actions/product_action'
 
 
 class AddProduct extends Component {
@@ -37,7 +38,16 @@ class AddProduct extends Component {
             publish:this.props.misc.selectedPublish
         }
 
-        console.log(data)
+        this.props.addProduct(data).then(res=>{
+
+            if(res.payload.err.success === true){
+                alert('Product Added Sucess Full')
+            }else{
+                if(res.payload.err.name ==="ValidationError"){
+                    alert("All Field Required")
+                }
+            }
+        })
     }
     render() {
 
@@ -68,7 +78,7 @@ class AddProduct extends Component {
                        <DropdownPublish />
                     </div>
                     <div>
-                       <Button onClick={this.handleSubmit}>Add Product</Button>
+                       <Button onClick={this.handleSubmit} style={{background:'black',color:'#fff'}}>Add Product</Button>
                     </div>
                 </div>
             </UserLayout>
@@ -79,7 +89,7 @@ class AddProduct extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch);
+    return bindActionCreators({addProduct}, dispatch);
 }
 
 function mapStateToProps({ misc }) {

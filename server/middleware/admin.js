@@ -1,5 +1,5 @@
 let admin = (req,res,next) =>{
-    if(req.user.role === 1){
+    if(req.user.role === 0){
         return res.send('you are Not Allowed')
     }
     next()

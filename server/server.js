@@ -215,9 +215,11 @@ app.get('/api/product/articles', (req, res) => {
 //BY SELL
 
 app.post('/api/product/article', auth, admin, (req, res) => {
+
     const product = new Product(req.body);
 
     product.save((err, doc) => {
+       
         if (err) return res.json({ success: false, err })
 
         res.status(200).json({
@@ -247,9 +249,6 @@ app.get('/api/product/articles_by_id', (req, res) => {
         .populate('brand')
         .populate('wood')
         .exec((err, docs) => {
-
-            console.log("line 180", docs)
-
             return res.status(200).send(docs)
 
         })

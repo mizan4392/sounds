@@ -4,9 +4,9 @@ import * as TYPES from '../types'
 
 
 
-export function addProducts(data){
+export function addProduct(data){
 
-    const request = axios.get(`${USER_PRODUCT}/article`,data)
+    const request = axios.post(`${USER_PRODUCT}/article`,data).then(res=> res.data)
 
     return{
         type:TYPES.ADD_PRODUCT,
